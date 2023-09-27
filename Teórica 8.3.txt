@@ -1,0 +1,51 @@
+# Ejemplo bien rudimentario!
+
+# quiero sumar los elementos de cada fila
+
+x<-matrix(1:6,2,3)      # mi matriz
+
+#      [,1] [,2] [,3]
+#[1,]    1    3    5
+#[2,]    2    4    6
+
+
+suma_fila<-vector("numeric",2)  #creo un vector para guardar la info
+aux=0              # creo una variable auxiliar para los calculos
+
+for (i in 1:2){ # recorro las 2 filas con el contador "i"
+  
+  for (ii in 1:3){    # recorro las 3 columnas con el contador "ii"
+    
+    aux=aux + x[i,ii]  # en la variable aux voy almacenando la suma de los elementos de cada fila
+ 
+     }   # cierro el contador de las columnas 
+  
+  suma_fila[i]=aux  # almaceno en el vector, en su primer elemento i=1 el resultado de aux
+ 
+   aux=0   #inicializo nuevamente en 0 a aux, para ahora sumar los elementos de la fila 2
+}  # termino
+
+suma_fila  #me da el resultado
+
+
+#funcion apply
+apply(x,1,sum)
+
+# otra funcion
+rowSums(x)
+
+
+
+# Este es el mismo ejemplo con el error de no poner aux nuevamente en 0
+
+suma_fila<-vector("numeric",2)
+aux=0
+
+for (i in 1:2){
+  for (ii in 1:3){
+    aux=aux + x[i,ii]
+  }
+  suma_fila[i]=aux
+ }
+
+suma_fila     # ¿que resultado me da la suma de la segunda fila?
