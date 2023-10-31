@@ -106,3 +106,63 @@ colors()[grep("red",colors())] # todos los tonos de rojo
 
 #-------------------------------------------------------------------------------
 #Script de Colors
+#-------------------------------------------------------------------------------
+#axes: un valor logico indicando si ambos ejes deben ser dibujados. Usar parametro grafico
+#“xaxt” o “yaxt” para eliminar uno de los ejes.
+#frame.plot: logical, indicando si se debe trazar un recuadro al grafico. Default TRUE
+#lty: un vector con tipos de lineas.
+#lwd: un vector con anchos de lineas. Numeros positivos, default 1.
+#0=blank, 1=solid (default), 2=dashed, 3=dotted, 4=dotdash, 5=longdash, 6=twodash
+x<--10:10
+plot(x,type="l",lty=2,lwd=4,col="deeppink")
+
+#PAR
+#puede ser usado para establecer o preguntar por parámetros gráficos. Escribir
+#en la consola par() devuelve los valores de los parámetros
+
+#bg: El color de fondo del área de graficado
+#fg: El color del “foreground” de los gráficos. Es el color que se usa por
+#default en los ejes, cajas alrededor de los gráficos, etc.
+#fig: Un vector numérico del tipo c(x1, x2, y1, y2) que da las coordenadas
+#(NDC) de la figura en la región de display. Si se establecen estos valores
+#se inicia un nuevo grafico, para agregar al grafico existente usar
+#también new = TRUE.
+#mai: Un vector numérico del tipo c(inferior, izquierdo, superior, derecho)
+#que especifica el tamaño de los márgenes en pulgadas.
+#mar: idem mai pero en lugar de pulgadas numero de líneas. Default c(5, 4, 4, 2) + 0.1.
+#oma: Un vector del tipo c(inferior, izquierdo, superior, derecho) dando el
+#tamaño de los márgenes externos en líneas de texto.
+#omd: Un vector del tipo c(x1, x2, y1, y2) dando la región dentro de los márgenes
+#exteriores en NDC (= normalized device coordinates), i.e., como una fracción (in [0, 1]) de la región.
+#omi: Un vector del tipo c(inferior, izquierdo, superior, derecho)
+#dando el tamaño de los márgenes externos en pulgadas.
+
+#LEGEND: Esta funcion puede ser usada para agregar una leyenda al grafico.
+
+#LAYOUT: divide el dispositivo en tantas filas y columnas como aparecen en la matriz mat, con
+#los anchos de las columnas y las alturas de las filas especificadas en sus respectivos argumentos.
+#layout(mat, widths = rep.int(1, ncol(mat)), heights = rep.int(1, nrow(mat)), respect = FALSE)
+#layout.show(n = 1) #grafica (parte de) la disposicion actual, esquema de las n figuras.
+#lcm(x) # tomar x como el numero de centimetr
+
+#EJEMPLO 1
+layout(matrix(c(1,1,0,2), 2, 2, byrow = TRUE))
+layout.show(2)
+x<-array(rnorm(100),c(100,4)) #datos a graficar.
+titulo<-c("Figura1","Figura 2","Figura 3","Figura 4") #Titulo de c/ graf indiv
+for(k in 1:4){
+  plot(x[,k], type="l", col="darkblue", lwd=2,
+       ylab="variable",xlab="tiempo",xlim=c(0,100),ylim =c(-3,3) )
+  title(main=(titulo[k]), line=1, cex.main=1.2)
+  }
+
+#EJEMPLO 2
+nf <- layout(matrix(c(1,1,0,2), 2, 2, byrow = TRUE), respect = TRUE) 
+#igual a la anterior salvo respect, relaciones entre altos y anchos
+layout.show(nf)
+
+#EJEMPLO 3
+# crea una sola figura de 5cm x 5cm.#le especifico el alto y el ancho de la figura
+nf <- layout(matrix(1), widths = lcm(5), heights = lcm(5)) 
+layout.show(nf)
+
