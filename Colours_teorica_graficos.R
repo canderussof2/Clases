@@ -16,18 +16,23 @@ par(fig=c(0,1,0,1), # Figure region in the device display region (x1,x2,y1,y2)
     omi=c(0.05,0.15,0,0.05), # global margins in inches (bottom, left, top, right)
     mai=c(0.6,0.6,0.6,0.5)) # subplot margins in inches (bottom, left, top, right)
 
-barplot(X, col= colors)
+barplot(X, col= colors) #diagrama de barras, cada bloque con un color distinto
+
 legend("topleft", colors  , text.col = "darkblue", horiz = FALSE,
+       col=colors, cex=0.8, lty=1, y.intersp = 1, lwd = 3 ) #grafico la leyenda
+#topleft: part3e sup izq, colores los toma de colors y el color del texto en azul oscuro,
+#leyenda escrita en vertical, colores se toma de colors.
+legend("bottomleft", colors  , text.col = "violetred3", horiz = TRUE,
        col=colors, cex=0.8, lty=1, y.intersp = 1, lwd = 3 )
 
 ########################################################################################
 #### Paletas de colores Mapas ##########################################################
 ########################################################################################
-require(ncdf)
+require(ncdf4)
 require(fields)
 require(mapdata)
 
-nc<- open.ncdf(paste("d:/Moira/PCFacultad/R_course/Data/","netcdf_SLP_SA_1979_2014.nc",sep=""))
+nc<- open.ncdf4(paste("/home/clinux01/Escritorio/Cande Labo Martes/Clases-Teoricas","netcdf_SLP_SA_1979_2014.nc",sep=""))
 lon<-get.var.ncdf(nc,"longitude")
 lats<-get.var.ncdf(nc,"latitude")
 time<-get.var.ncdf(nc,"time")
